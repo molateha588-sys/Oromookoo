@@ -7,38 +7,20 @@ interface LoginViewProps {
   onLoginSuccess: (user: UserType) => void;
   onNavigateToForgot: () => void;
   onShowToast: (title: string, message?: string, type?: 'success' | 'error' | 'info') => void;
-  initialUsername?: string;
-  initialPassword?: string;
 }
 
 export const LoginView: React.FC<LoginViewProps> = ({
   onLoginSuccess,
   onNavigateToForgot,
-  onShowToast,
-  initialUsername = '',
-  initialPassword = ''
+  onShowToast
 }) => {
-  const [identifier, setIdentifier] = useState(initialUsername);
-  const [password, setPassword] = useState(initialPassword);
+  const [identifier, setIdentifier] = useState('');
+  const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
   const passwordInputRef = useRef<HTMLInputElement>(null);
-
-  useEffect(() => {
-    if (initialUsername) {
-      setIdentifier(initialUsername);
-      setTimeout(() => {
-        if (passwordInputRef.current) {
-          passwordInputRef.current.focus();
-        }
-      }, 200);
-    }
-    if (initialPassword) {
-      setPassword(initialPassword);
-    }
-  }, [initialUsername, initialPassword]);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -67,6 +49,10 @@ export const LoginView: React.FC<LoginViewProps> = ({
         return;
       }
 
+      // Clear login credentials from memory
+      setIdentifier('');
+      setPassword('');
+
       onShowToast('Signed In', `Welcome back, ${result.user.full_name || result.user.username}!`, 'success');
       onLoginSuccess(result.user);
     } catch (err: any) {
@@ -75,14 +61,6 @@ export const LoginView: React.FC<LoginViewProps> = ({
       setLoading(false);
     }
   };
-
-  const handleSelectDemoAccount = (user: UserType) => {
-    setIdentifier(user.username);
-    setPassword(user.password_hash || 'user123');
-    setError(null);
-  };
-
-  const registeredUsers = storageService.getUsers();
 
   return (
     <div className="fixed inset-0 z-50 min-h-screen w-full flex items-center justify-center p-4 sm:p-6 bg-[#0b1319] overflow-y-auto">
@@ -138,6 +116,7 @@ export const LoginView: React.FC<LoginViewProps> = ({
                   onChange={(e) => setIdentifier(e.target.value)}
                   placeholder="Enter Username or Gmail"
                   className="w-full bg-transparent border-none text-white placeholder-blue-200/50 text-sm pl-2.5 outline-none focus:outline-none focus:ring-0"
+                  autoComplete="off"
                 />
               </div>
             </div>
@@ -171,6 +150,7 @@ export const LoginView: React.FC<LoginViewProps> = ({
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Enter Password"
                   className="w-full bg-transparent border-none text-white placeholder-blue-200/50 text-sm pl-2.5 pr-8 outline-none focus:outline-none focus:ring-0"
+                  autoComplete="off"
                 />
                 <button
                   type="button"
@@ -200,31 +180,6 @@ export const LoginView: React.FC<LoginViewProps> = ({
                 <span>LOGIN TO PORTAL</span>
               )}
             </button>
-
-            {/* Registered Accounts Helper */}
-            <div className="pt-4 border-t border-white/10 space-y-2">
-              <div className="text-[11px] font-semibold text-center text-blue-200/80">
-                Registered Accounts ({registeredUsers.length}):
-              </div>
-              <div className="flex flex-wrap gap-1.5 justify-center max-h-32 overflow-y-auto p-1">
-                {registeredUsers.map(u => (
-                  <button
-                    key={u.id}
-                    type="button"
-                    onClick={() => handleSelectDemoAccount(u)}
-                    className="px-2.5 py-1 rounded-xl bg-white/10 hover:bg-white/20 text-xs text-blue-100 font-medium flex items-center gap-1.5 transition-all border border-white/15 hover:border-cyan-300 cursor-pointer"
-                    title={`Click to fill credentials for @${u.username}`}
-                  >
-                    <span 
-                      className="w-2 h-2 rounded-full shrink-0"
-                      style={{ backgroundColor: u.avatar_color || '#005a9e' }}
-                    />
-                    <span className="font-bold">@{u.username}</span>
-                    <span className="text-[10px] text-blue-200/60 font-mono">({u.role})</span>
-                  </button>
-                ))}
-              </div>
-            </div>
           </form>
         </div>
       </div>
