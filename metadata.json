@@ -1,0 +1,6 @@
+{
+  "name": "Biiroo Eegumsa Fayyaa",
+  "description": "Biiroo Eegumsa Fayyaa - Health data reporting, interactive spreadsheet management, operational tracking, and analytics portal.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
