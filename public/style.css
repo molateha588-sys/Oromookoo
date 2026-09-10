@@ -1,0 +1,306 @@
+/* ==========================================================================
+   🏥 Biiroo Eegumsa Fayyaa Data Admin
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --primary: #0284c7;         /* Safe Clinical Blue */
+  --primary-hover: #0369a1;
+  --secondary: #64748b;       /* Cool Slate Gray */
+  --secondary-hover: #475569;
+  --success: #10b981;         /* Healthy Green */
+  --success-hover: #059669;
+  --danger: #ef4444;          /* Alert Red */
+  --danger-hover: #dc2626;
+  --warning: #f59e0b;
+  
+  --bg-main: #f8fafc;         /* Crisp Soft Background */
+  --card-bg: #ffffff;
+  --text-main: #1e293b;       /* Charcoal Text */
+  --text-muted: #64748b;
+  --border-color: #e2e8f0;    /* Light Slate Border */
+  --focus-ring: rgba(2, 132, 199, 0.15);
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --radius: 10px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  line-height: 1.6;
+}
+
+/* Container & Layout */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 30px 20px;
+}
+
+/* Beautiful Navigation Header */
+.navbar {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  color: white;
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: var(--shadow-md);
+  border-bottom: 1px solid #334155;
+}
+
+.navbar h3 {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.navbar div {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+#welcome {
+  font-size: 14px;
+  font-weight: 500;
+  color: #cbd5e1;
+}
+
+/* Premium Dashboard Grid cards */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 24px;
+  margin-top: 24px;
+}
+
+.col-4 { grid-column: span 4; }
+.col-6 { grid-column: span 6; }
+.col-8 { grid-column: span 8; }
+.col-12 { grid-column: span 12; }
+
+@media (max-width: 900px) {
+  .col-4, .col-6, .col-8 { grid-column: span 12; }
+}
+
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  padding: 24px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+
+.card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.card h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-main);
+  margin-bottom: 16px;
+  border-bottom: 2px solid var(--bg-main);
+  padding-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Input Fields & Select elements */
+input[type="text"], 
+input[type="password"], 
+input[type="file"], 
+select {
+  width: 100%;
+  padding: 11px 14px;
+  margin: 8px 0 16px 0;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  background-color: #f8fafc;
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--text-main);
+  transition: all 0.2s;
+}
+
+input:focus, select:focus {
+  outline: none;
+  border-color: var(--primary);
+  background-color: #fff;
+  box-shadow: 0 0 0 4px var(--focus-ring);
+}
+
+label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+/* Redesigned Premium Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  width: 100%;
+}
+
+.btn-primary, .btn:not([class*="btn-"]) {
+  background-color: var(--primary);
+  color: white;
+}
+.btn-primary:hover, .btn:not([class*="btn-"]):hover {
+  background-color: var(--primary-hover);
+}
+
+.btn-secondary {
+  background-color: var(--secondary);
+  color: white;
+}
+.btn-secondary:hover {
+  background-color: var(--secondary-hover);
+}
+
+.btn-success {
+  background-color: var(--success);
+  color: white;
+}
+.btn-success:hover {
+  background-color: var(--success-hover);
+}
+
+.btn-danger {
+  background-color: var(--danger);
+  color: white;
+}
+.btn-danger:hover {
+  background-color: var(--danger-hover);
+}
+
+/* Polished Spreadsheets & Tables */
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  background-color: #fff;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  text-align: left;
+}
+
+th {
+  background-color: #f1f5f9;
+  color: #475569;
+  font-weight: 600;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+td {
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-main);
+  background-color: #fff;
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+tr:hover td {
+  background-color: #f8fafc;
+}
+
+/* User Input Spreadsheet-Grid Mode */
+#dataTable td input {
+  border: 1px solid transparent;
+  background: transparent;
+  padding: 6px 10px;
+  margin: 0;
+  width: 100%;
+  border-radius: 4px;
+}
+
+#dataTable td input:focus {
+  border-color: var(--primary);
+  background: white;
+  box-shadow: 0 0 0 2px var(--focus-ring);
+}
+
+/* Alerts and Information Banners */
+.message {
+  padding: 12px 16px;
+  margin: 15px 0;
+  border-radius: 6px;
+  font-size: 13.5px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.success {
+  background-color: #ecfdf5;
+  color: #065f46;
+  border: 1px solid #a7f3d0;
+}
+
+.error {
+  background-color: #fef2f2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
+}
+
+/* Lists and Inline Metadata Items */
+ul {
+  list-style: none;
+}
+
+li {
+  padding: 12px;
+  border-bottom: 1px solid var(--border-color);
+  font-size: 13.5px;
+}
+
+li:last-child {
+  border-bottom: none;
+}
+
+li strong {
+  color: var(--text-main);
+  font-size: 14px;
+}
+
+li small {
+  color: var(--text-muted);
+}
