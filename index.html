@@ -1,18 +1,73 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Biiroo Eegumsa Fayyaa</title>
-    <meta name="description" content="Biiroo Eegumsa Fayyaa - Health data reporting, interactive spreadsheet management, operational tracking, and analytics portal." />
-    <meta property="og:title" content="Biiroo Eegumsa Fayyaa" />
-    <meta property="og:description" content="Biiroo Eegumsa Fayyaa - Health data reporting, interactive spreadsheet management, operational tracking, and analytics portal." />
-    <meta property="og:type" content="website" />
-    <meta name="twitter:card" content="summary_large_image" />
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
-</html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Portal - Health Data Reporter</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
 
+  <nav class="navbar">
+    <h3><i class="fa-solid fa-house-medical" style="color:#38bdf8;"></i> PulseData Reporting Hub</h3>
+    <div>
+      <span id="welcome"></span>
+      <button class="btn btn-secondary" style="width: auto; padding: 6px 14px; font-size: 12px;" onclick="logout()">
+        <i class="fa-solid fa-arrow-right-from-bracket"></i> Logout
+      </button>
+    </div>
+  </nav>
+
+  <div class="container">
+    
+    <!-- Empty State Message -->
+    <div id="noTemplate" class="card" style="display:none; text-align: center; padding: 50px 20px;">
+      <i class="fa-solid fa-file-circle-exclamation" style="font-size: 50px; color: var(--text-muted); margin-bottom: 16px;"></i>
+      <h2>No Template Assigned</h2>
+      <p style="color: var(--text-muted); margin-top: 8px;">Your administrator has not assigned an active data sheet to your account. Please contact your coordinator.</p>
+    </div>
+
+    <!-- Active Form Entry Area -->
+    <div id="templateArea" style="display:none;">
+      <div class="card">
+        <h3 style="justify-content: space-between; border-bottom: none; margin-bottom: 8px;">
+          <span><i class="fa-solid fa-notes-medical" style="color: var(--primary);"></i> Template: <span id="templateName"></span></span>
+          <span style="font-size: 12px; background: #e0f2fe; color: #0369a1; padding: 4px 10px; border-radius: 4px; font-weight: 500;">
+            <i class="fa-solid fa-shield-halved"></i> HIPAA Form Ready
+          </span>
+        </h3>
+        
+        <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 20px;">
+          Complete the records below. Click <strong>Add Row</strong> to log additional entries, then click <strong>Submit / Update</strong> when finished.
+        </p>
+
+        <!-- Web Spreadsheet Grid -->
+        <div class="table-responsive" style="margin-bottom: 20px;">
+          <table id="dataTable">
+            <thead>
+              <tr></tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+        <!-- Action Buttons -->
+        <div style="display: flex; gap: 12px; justify-content: space-between; align-items: center;">
+          <button class="btn btn-secondary" style="width: auto;" onclick="addRow()">
+            <i class="fa-solid fa-plus"></i> Add Row
+          </button>
+          <button class="btn btn-success" style="width: auto;" onclick="submitData()">
+            <i class="fa-solid fa-paper-plane"></i> Submit / Update Records
+          </button>
+        </div>
+
+        <div id="msg"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="/js/user.js"></script>
+</body>
+</html>
